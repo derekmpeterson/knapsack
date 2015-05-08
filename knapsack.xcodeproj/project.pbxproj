@@ -7,24 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65B024EA1AFAE4AD00CC3722 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B024E91AFAE4AD00CC3722 /* main.cpp */; };
+		65B024F11AFAE4F400CC3722 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B024F01AFAE4F400CC3722 /* SDL2.framework */; };
+		65B024F41AFC398B00CC3722 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B024F31AFC398B00CC3722 /* SDL2_image.framework */; };
+		65B024F61AFC3C7A00CC3722 /* Content in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B024F51AFC3C7100CC3722 /* Content */; };
+		65B025031AFC448100CC3722 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B024FE1AFC448100CC3722 /* Actor.cpp */; };
+		65B025041AFC448100CC3722 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025011AFC448100CC3722 /* main.cpp */; };
+		65B025071AFC4F1D00CC3722 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025051AFC4F1D00CC3722 /* Player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		65B024E41AFAE4AD00CC3722 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				65B024F61AFC3C7A00CC3722 /* Content in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		65B024E61AFAE4AD00CC3722 /* knapsack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = knapsack; sourceTree = BUILT_PRODUCTS_DIR; };
-		65B024E91AFAE4AD00CC3722 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		65B024F01AFAE4F400CC3722 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		65B024F31AFC398B00CC3722 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		65B024F51AFC3C7100CC3722 /* Content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Content; path = knapsack/Content; sourceTree = "<group>"; };
+		65B024FE1AFC448100CC3722 /* Actor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Actor.cpp; path = Code/Actor.cpp; sourceTree = "<group>"; };
+		65B024FF1AFC448100CC3722 /* Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Actor.h; path = Code/Actor.h; sourceTree = "<group>"; };
+		65B025001AFC448100CC3722 /* ext */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ext; path = Code/ext; sourceTree = "<group>"; };
+		65B025011AFC448100CC3722 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Code/main.cpp; sourceTree = "<group>"; };
+		65B025021AFC448100CC3722 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = Code/main.h; sourceTree = "<group>"; };
+		65B025051AFC4F1D00CC3722 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = Code/Player.cpp; sourceTree = "<group>"; };
+		65B025061AFC4F1D00CC3722 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Code/Player.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B024F41AFC398B00CC3722 /* SDL2_image.framework in Frameworks */,
+				65B024F11AFAE4F400CC3722 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +58,11 @@
 		65B024DD1AFAE4AD00CC3722 = {
 			isa = PBXGroup;
 			children = (
+				65B024F31AFC398B00CC3722 /* SDL2_image.framework */,
+				65B024F01AFAE4F400CC3722 /* SDL2.framework */,
 				65B024E81AFAE4AD00CC3722 /* knapsack */,
 				65B024E71AFAE4AD00CC3722 /* Products */,
+				65B024F51AFC3C7100CC3722 /* Content */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,7 +77,13 @@
 		65B024E81AFAE4AD00CC3722 /* knapsack */ = {
 			isa = PBXGroup;
 			children = (
-				65B024E91AFAE4AD00CC3722 /* main.cpp */,
+				65B024FE1AFC448100CC3722 /* Actor.cpp */,
+				65B024FF1AFC448100CC3722 /* Actor.h */,
+				65B025001AFC448100CC3722 /* ext */,
+				65B025011AFC448100CC3722 /* main.cpp */,
+				65B025021AFC448100CC3722 /* main.h */,
+				65B025051AFC4F1D00CC3722 /* Player.cpp */,
+				65B025061AFC4F1D00CC3722 /* Player.h */,
 			);
 			path = knapsack;
 			sourceTree = "<group>";
@@ -118,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65B024EA1AFAE4AD00CC3722 /* main.cpp in Sources */,
+				65B025041AFC448100CC3722 /* main.cpp in Sources */,
+				65B025031AFC448100CC3722 /* Actor.cpp in Sources */,
+				65B025071AFC4F1D00CC3722 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +233,10 @@
 		65B024EE1AFAE4AD00CC3722 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +244,10 @@
 		65B024EF1AFAE4AD00CC3722 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
