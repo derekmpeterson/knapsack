@@ -1,0 +1,11 @@
+DNA =
+{
+    ImagePath = "Characters/Tree/Tree.png",
+    Gadgets =
+    {
+        Collision =
+        {
+            Extents = { -32, 0, 32, 32},
+        },
+    },
+}

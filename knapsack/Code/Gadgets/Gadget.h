@@ -10,16 +10,22 @@
 #define __knapsack__Gadget__
 
 #include <stdio.h>
+#include <string>
+
+typedef int ActorHandle;
 
 class Gadget
 {
 public:
-    char* m_gadgetType;
+    std::string m_gadgetType;
+    
+    ActorHandle m_actorHandle;
     
     Gadget();
     
-    void Init();
-    void Update( float dt );
+    virtual void Init();
+    virtual void Update( float dt );
+    virtual void Draw();
 };
 
 #endif /* defined(__knapsack__Gadget__) */

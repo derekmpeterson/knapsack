@@ -7,13 +7,24 @@
 //
 
 #include "Gadget.h"
+#include "../Systems/GadgetSystem.h"
 
 Gadget::Gadget()
 {
-    m_gadgetType = (char*) "Gadget";
+    
+}
+
+void Gadget::Init()
+{
+    
 }
 
 void Gadget::Update( float dt )
+{
+    
+}
+
+void Gadget::Draw()
 {
     
 }

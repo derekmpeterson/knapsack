@@ -14,6 +14,7 @@
 #include "SDL2_Image/SDL_Image.h"
 #include "ext/Vector2d.cpp"
 #include <vector>
+#include <string>
 #include "Gadget.h"
 
 typedef int ActorHandle;
@@ -28,7 +29,7 @@ private:
     std::vector<Gadget*> m_gadgets;
     
 public:
-    Actor( char* i_imageName );
+    Actor( std::string i_imageName );
     ~Actor() {};
     
     ActorHandle m_actorHandle;
@@ -46,7 +47,7 @@ public:
     void Update( float dt );
     void Draw();
     
-    void AttachGadget( Gadget* i_gadget );
+    void AttachGadget( std::string i_gadgetType );
 };
 
 #endif /* defined(__knapsack__Actor__) */

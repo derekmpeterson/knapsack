@@ -8,15 +8,18 @@
 
 #include "Actor.h"
 #include "Systems/ActorSystem.h"
+#include "Systems/GadgetSystem.h"
 #include "Camera.h"
+#include "DEFINES.h"
 
 extern SDL_Renderer* g_gameRenderer;
 extern ActorSystem* g_actorSystem;
 extern Camera* g_camera;
 
-Actor::Actor( char* i_imageName ) : m_speed( 200 )
+Actor::Actor( std::string i_imageName ) : m_speed( 200 )
 {
-    m_texture = IMG_LoadTexture( g_gameRenderer, i_imageName );
+    i_imageName = "Content/" + i_imageName;
+    m_texture = IMG_LoadTexture( g_gameRenderer, i_imageName.c_str() );
     SDL_SetTextureBlendMode( m_texture, SDL_BLENDMODE_BLEND );
 }
 
@@ -25,7 +28,8 @@ void Actor::Update( float dt )
     for (std::vector<Gadget*>::iterator it = m_gadgets.begin() ; it != m_gadgets.end(); ++it)
     {
         Gadget* pGadget = *it;
-        pGadget->Update( dt );
+        if ( pGadget )
+            pGadget->Update( dt );
     }
     m_pos += m_acceleration * dt;
 }
@@ -48,9 +52,19 @@ void Actor::Draw()
         SDL_Rect Rect = { (int) pLocalPos.GetX(), (int) pLocalPos.GetY(), pWidth, pHeight };
         SDL_RenderCopy( g_gameRenderer, pTexture, NULL, &Rect );
     }
+    
+    for (std::vector<Gadget*>::iterator it = m_gadgets.begin() ; it != m_gadgets.end(); ++it)
+    {
+        Gadget* pGadget = *it;
+        if ( pGadget )
+            pGadget->Draw();
+    }
 }
 
-void Actor::AttachGadget( Gadget* i_gadget )
+void Actor::AttachGadget( std::string i_gadgetType )
 {
-    m_gadgets.push_back( i_gadget );
+    Gadget* gadget = GadgetSystem::CreateInstance( i_gadgetType );
+    ASSERTS( gadget, "Attempting to attach invalid gadget type '"+i_gadgetType+"'" );
+    gadget->m_actorHandle = m_actorHandle;
+    m_gadgets.push_back( gadget );
 }

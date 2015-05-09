@@ -31,21 +31,21 @@ int main( int argc, char* args[] )
     SDL_SetRenderDrawColor( g_gameRenderer, 0, 0, 0, 255 );
     SDL_RenderClear( g_gameRenderer );
     
-    Actor* a = ActorSystem::CreateActor( (char*) "Content/Terrain/bg.png" );
+    Actor* a = ActorSystem::CreateActor( "Background" );
     a->SetPos( Vector2d( 960, 240 ) );
     
-    g_player = new Player( ActorSystem::CreateActor( (char*) "Content/Characters/Avatar/Avatar.png" ) );
+    
+    g_player = new Player( ActorSystem::CreateActor( "Avatar" ) );
     g_player->GetActor()->SetPos( Vector2d( 250, 428 ) );
-    g_player->GetActor()->AttachGadget( new CollisionGadget() );
     
     // create some temporary actors for spatial reference
-    Actor* b = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    Actor* b = ActorSystem::CreateActor( "Tree" );
     b->SetPos( Vector2d( 100, 332 ) );
-    Actor* c = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    Actor* c = ActorSystem::CreateActor( "Tree" );
     c->SetPos( Vector2d( 300, 332 ) );
-    Actor* d = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    Actor* d = ActorSystem::CreateActor( "Tree" );
     d->SetPos( Vector2d( 400, 332 ) );
-    Actor* e = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    Actor* e = ActorSystem::CreateActor( "Tree" );
     e->SetPos( Vector2d( 500, 332 ) );
     
     g_camera = new Camera( g_player->GetActor() );
@@ -65,7 +65,7 @@ void loop()
         
 #ifdef DEBUG
         float frameRate = 1000.0f / (float ) delta;
-        std::cout << "FPS: " << frameRate << std::endl;
+        //std::cout << "FPS: " << frameRate << std::endl;
 #endif // DEBUG
         processInput();
         
@@ -78,10 +78,11 @@ void loop()
 
 void render( float dt )
 {
+    SDL_SetRenderDrawColor( g_gameRenderer, 0, 0, 0, 255 );
     SDL_RenderClear( g_gameRenderer );
     
-    for (std::map<ActorHandle,Actor>::iterator it=ActorSystem::m_actors.begin(); it!=ActorSystem::m_actors.end(); ++it)
-        it->second.Draw();
+    for (std::map<ActorHandle,Actor*>::iterator it=ActorSystem::m_actors.begin(); it!=ActorSystem::m_actors.end(); ++it)
+        it->second->Draw();
     SDL_RenderPresent( g_gameRenderer );
 }
 

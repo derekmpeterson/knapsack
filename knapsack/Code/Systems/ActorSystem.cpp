@@ -8,22 +8,45 @@
 
 #include "ActorSystem.h"
 #include <random>
+#include "../ext/LuaScript.h"
 
-std::map<ActorHandle,Actor> ActorSystem::m_actors;
+std::map<ActorHandle,Actor*> ActorSystem::m_actors;
 
-Actor* ActorSystem::CreateActor( char* i_imageName )
+Actor* ActorSystem::CreateActor( std::string i_name )
 {
     ActorHandle newHandle = rand() % 1000000000;
     while ( ActorSystem::m_actors.count( newHandle ) != 0 )
         newHandle = rand() % 1000000000;
-    Actor newActor = Actor( i_imageName );
-    newActor.m_actorHandle = newHandle;
+    
+    LuaScript script( "Content/Characters/"+i_name+".dna" );
+    std::string imagePath = script.get<std::string>("DNA.ImagePath");
+    
+    Actor* newActor = new Actor( imagePath );
+    newActor->m_actorHandle = newHandle;
+    
+    
+    std::vector<std::string> keys = script.getTableKeys("DNA");
+    if ( std::find(keys.begin(), keys.end(), "Gadgets") != keys.end() )
+    {
+        // Gadgets table exists!
+        keys = script.getTableKeys("DNA.Gadgets");
+        for(std::vector<std::string>::iterator it = keys.begin(); it != keys.end(); it++) {
+            std::string gadgetName = *it;
+            newActor->AttachGadget( gadgetName );
+        }
+    }
     
     ActorSystem::m_actors.insert( std::make_pair( newHandle, newActor ) );
     return ActorSystem::GetActor( newHandle );
 }
 
+void ActorSystem::DeleteActor( ActorHandle i_actorHandle )
+{
+    delete ActorSystem::GetActor( i_actorHandle );
+    ActorSystem::m_actors.erase( i_actorHandle );
+}
+
 Actor* ActorSystem::GetActor( ActorHandle i_actorHandle )
 {
-    return &ActorSystem::m_actors.at( i_actorHandle );
+    return ActorSystem::m_actors.at( i_actorHandle );
 }

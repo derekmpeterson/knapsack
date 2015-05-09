@@ -1,0 +1,7 @@
+DNA =
+{
+    ImagePath = "Terrain/bg.png",
+    Gadgets =
+    {
+    },
+}
