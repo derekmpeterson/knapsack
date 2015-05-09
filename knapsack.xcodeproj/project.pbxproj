@@ -13,6 +13,11 @@
 		65B025031AFC448100CC3722 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B024FE1AFC448100CC3722 /* Actor.cpp */; };
 		65B025041AFC448100CC3722 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025011AFC448100CC3722 /* main.cpp */; };
 		65B025071AFC4F1D00CC3722 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025051AFC4F1D00CC3722 /* Player.cpp */; };
+		65B0250D1AFD921400CC3722 /* ActorSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B0250C1AFD921400CC3722 /* ActorSystem.cpp */; };
+		65B0250F1AFD921D00CC3722 /* Vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B0250E1AFD921D00CC3722 /* Vector2d.cpp */; };
+		65B025121AFD9DB400CC3722 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025101AFD9DB400CC3722 /* Camera.cpp */; };
+		65B025161AFDA9E800CC3722 /* Gadget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025141AFDA9E800CC3722 /* Gadget.cpp */; };
+		65B025191AFDAAA300CC3722 /* CollisionGadget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025171AFDAAA300CC3722 /* CollisionGadget.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +45,16 @@
 		65B025021AFC448100CC3722 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = Code/main.h; sourceTree = "<group>"; };
 		65B025051AFC4F1D00CC3722 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = Code/Player.cpp; sourceTree = "<group>"; };
 		65B025061AFC4F1D00CC3722 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Code/Player.h; sourceTree = "<group>"; };
+		65B025081AFD8CCC00CC3722 /* Systems */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Systems; path = Code/Systems; sourceTree = "<group>"; };
+		65B0250C1AFD921400CC3722 /* ActorSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ActorSystem.cpp; path = knapsack/Code/Systems/ActorSystem.cpp; sourceTree = "<group>"; };
+		65B0250E1AFD921D00CC3722 /* Vector2d.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Vector2d.cpp; path = knapsack/Code/ext/Vector2d.cpp; sourceTree = "<group>"; };
+		65B025101AFD9DB400CC3722 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = Code/Camera.cpp; sourceTree = "<group>"; };
+		65B025111AFD9DB400CC3722 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = Code/Camera.h; sourceTree = "<group>"; };
+		65B025131AFDA63500CC3722 /* DEFINES.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEFINES.h; sourceTree = "<group>"; };
+		65B025141AFDA9E800CC3722 /* Gadget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gadget.cpp; path = Code/Gadgets/Gadget.cpp; sourceTree = "<group>"; };
+		65B025151AFDA9E800CC3722 /* Gadget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gadget.h; path = Code/Gadgets/Gadget.h; sourceTree = "<group>"; };
+		65B025171AFDAAA300CC3722 /* CollisionGadget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionGadget.cpp; path = Code/Gadgets/CollisionGadget.cpp; sourceTree = "<group>"; };
+		65B025181AFDAAA300CC3722 /* CollisionGadget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionGadget.h; path = Code/Gadgets/CollisionGadget.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,8 @@
 		65B024DD1AFAE4AD00CC3722 = {
 			isa = PBXGroup;
 			children = (
+				65B0250E1AFD921D00CC3722 /* Vector2d.cpp */,
+				65B0250C1AFD921400CC3722 /* ActorSystem.cpp */,
 				65B024F31AFC398B00CC3722 /* SDL2_image.framework */,
 				65B024F01AFAE4F400CC3722 /* SDL2.framework */,
 				65B024E81AFAE4AD00CC3722 /* knapsack */,
@@ -84,8 +101,24 @@
 				65B025021AFC448100CC3722 /* main.h */,
 				65B025051AFC4F1D00CC3722 /* Player.cpp */,
 				65B025061AFC4F1D00CC3722 /* Player.h */,
+				65B025081AFD8CCC00CC3722 /* Systems */,
+				65B025101AFD9DB400CC3722 /* Camera.cpp */,
+				65B025111AFD9DB400CC3722 /* Camera.h */,
+				65B025131AFDA63500CC3722 /* DEFINES.h */,
+				65B0251A1AFDABEE00CC3722 /* Gadgets */,
 			);
 			path = knapsack;
+			sourceTree = "<group>";
+		};
+		65B0251A1AFDABEE00CC3722 /* Gadgets */ = {
+			isa = PBXGroup;
+			children = (
+				65B025141AFDA9E800CC3722 /* Gadget.cpp */,
+				65B025151AFDA9E800CC3722 /* Gadget.h */,
+				65B025171AFDAAA300CC3722 /* CollisionGadget.cpp */,
+				65B025181AFDAAA300CC3722 /* CollisionGadget.h */,
+			);
+			name = Gadgets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,8 +177,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B0250F1AFD921D00CC3722 /* Vector2d.cpp in Sources */,
+				65B0250D1AFD921400CC3722 /* ActorSystem.cpp in Sources */,
+				65B025161AFDA9E800CC3722 /* Gadget.cpp in Sources */,
 				65B025041AFC448100CC3722 /* main.cpp in Sources */,
+				65B025191AFDAAA300CC3722 /* CollisionGadget.cpp in Sources */,
 				65B025031AFC448100CC3722 /* Actor.cpp in Sources */,
+				65B025121AFD9DB400CC3722 /* Camera.cpp in Sources */,
 				65B025071AFC4F1D00CC3722 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

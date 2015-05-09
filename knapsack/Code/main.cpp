@@ -9,13 +9,17 @@
 #include "SDL2/SDL.h"
 #include "SDL2_Image/SDL_Image.h"
 #include <stdio.h>
+#include "Systems/ActorSystem.h"
 #include "main.h"
+#include <iostream>
+#include "DEFINES.H"
+#include "Gadgets/CollisionGadget.h"
 
 int main( int argc, char* args[] )
 {
     g_lastFrame = 0;
     SDL_Init( SDL_INIT_VIDEO );
-    SDL_CreateWindowAndRenderer( 640, 480, 0, &g_gameWindow, &g_gameRenderer );
+    SDL_CreateWindowAndRenderer( SCREEN_WIDTH, SCREEN_HEIGHT, 0, &g_gameWindow, &g_gameRenderer );
     if( !g_gameWindow )
     {
         printf( "Could not create window: %s\n", SDL_GetError() );
@@ -27,7 +31,24 @@ int main( int argc, char* args[] )
     SDL_SetRenderDrawColor( g_gameRenderer, 0, 0, 0, 255 );
     SDL_RenderClear( g_gameRenderer );
     
-    g_player = new Player( new Actor( (char*) "Content/Characters/Avatar/Avatar.png" ) );
+    Actor* a = ActorSystem::CreateActor( (char*) "Content/Terrain/bg.png" );
+    a->SetPos( Vector2d( 960, 240 ) );
+    
+    g_player = new Player( ActorSystem::CreateActor( (char*) "Content/Characters/Avatar/Avatar.png" ) );
+    g_player->GetActor()->SetPos( Vector2d( 250, 428 ) );
+    g_player->GetActor()->AttachGadget( new CollisionGadget() );
+    
+    // create some temporary actors for spatial reference
+    Actor* b = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    b->SetPos( Vector2d( 100, 332 ) );
+    Actor* c = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    c->SetPos( Vector2d( 300, 332 ) );
+    Actor* d = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    d->SetPos( Vector2d( 400, 332 ) );
+    Actor* e = ActorSystem::CreateActor( (char*) "Content/Characters/Tree/Tree.png" );
+    e->SetPos( Vector2d( 500, 332 ) );
+    
+    g_camera = new Camera( g_player->GetActor() );
     
     loop();
     return 0;
@@ -41,9 +62,15 @@ void loop()
         unsigned int delta = pTime - g_lastFrame;
         g_lastFrame = pTime;
         float dt = (float) delta / 1000.0f;
+        
+#ifdef DEBUG
+        float frameRate = 1000.0f / (float ) delta;
+        std::cout << "FPS: " << frameRate << std::endl;
+#endif // DEBUG
         processInput();
         
         g_player->Update( dt );
+        g_camera->Update( dt );
         
         render( dt );
     }
@@ -52,7 +79,9 @@ void loop()
 void render( float dt )
 {
     SDL_RenderClear( g_gameRenderer );
-    g_player->GetActor()->Draw();
+    
+    for (std::map<ActorHandle,Actor>::iterator it=ActorSystem::m_actors.begin(); it!=ActorSystem::m_actors.end(); ++it)
+        it->second.Draw();
     SDL_RenderPresent( g_gameRenderer );
 }
 

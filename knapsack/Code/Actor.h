@@ -13,6 +13,10 @@
 #include "SDL2/SDL.h"
 #include "SDL2_Image/SDL_Image.h"
 #include "ext/Vector2d.cpp"
+#include <vector>
+#include "Gadget.h"
+
+typedef int ActorHandle;
 
 class Actor
 {
@@ -21,9 +25,13 @@ private:
     Vector2d m_acceleration;
     float m_speed;
     SDL_Texture* m_texture;
+    std::vector<Gadget*> m_gadgets;
+    
 public:
     Actor( char* i_imageName );
     ~Actor() {};
+    
+    ActorHandle m_actorHandle;
     
     void SetPos( Vector2d i_pos ) { m_pos = i_pos; };
     void SetAcceleration( Vector2d i_acceleration ) { m_acceleration = i_acceleration; };
@@ -37,6 +45,8 @@ public:
     
     void Update( float dt );
     void Draw();
+    
+    void AttachGadget( Gadget* i_gadget );
 };
 
 #endif /* defined(__knapsack__Actor__) */

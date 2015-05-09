@@ -11,6 +11,7 @@
 
 #include "Player.h"
 #include "Actor.h"
+#include "Camera.h"
 
 SDL_Window* g_gameWindow;
 SDL_Renderer* g_gameRenderer;
@@ -23,9 +24,8 @@ void processInput();
 void quit();
 void render( float dt );
 
-int DrawActor( Actor* i_actor );
-
 Player* g_player;
+Camera* g_camera;
 
 unsigned int g_lastFrame;
 

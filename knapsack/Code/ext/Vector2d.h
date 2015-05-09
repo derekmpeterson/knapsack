@@ -10,8 +10,7 @@
 #define __knapsack__Vector2d__
 
 #include <stdio.h>
-
-#endif /* defined(__knapsack__Vector2d__) */
+#include <cmath>
 
 class Vector2d
 {
@@ -39,7 +38,21 @@ public:
         return *this; // return the result by reference
     }
     
+    Vector2d& operator+( const Vector2d& other ) // compound assignment (does not need to be a member,
+    {                           // but often is, to modify the private members)
+        this->SetX( this->GetX() + other.GetX() );
+        this->SetY( this->GetY() + other.GetY() );
+        return *this; // return the result by reference
+    }
+    
     Vector2d& operator-=( const Vector2d& other ) // compound assignment (does not need to be a member,
+    {                           // but often is, to modify the private members)
+        this->SetX( this->GetX() - other.GetX() );
+        this->SetY( this->GetY() - other.GetY() );
+        return *this; // return the result by reference
+    }
+    
+    Vector2d& operator-( const Vector2d& other ) // compound assignment (does not need to be a member,
     {                           // but often is, to modify the private members)
         this->SetX( this->GetX() - other.GetX() );
         this->SetY( this->GetY() - other.GetY() );
@@ -61,3 +74,5 @@ public:
         return newVector;
     }
 };
+
+#endif /* defined(__knapsack__Vector2d__) */
