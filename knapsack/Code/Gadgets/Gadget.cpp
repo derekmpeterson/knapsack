@@ -14,9 +14,14 @@ Gadget::Gadget()
     
 }
 
-void Gadget::Init()
+void Gadget::Init( ActorHandle i_actorHandle )
 {
-    
+    m_actorHandle = i_actorHandle;
+}
+
+void Gadget::DNADataInit( ActorHandle i_actorHandle, LuaScript& i_script )
+{
+    Init( i_actorHandle );
 }
 
 void Gadget::Update( float dt )

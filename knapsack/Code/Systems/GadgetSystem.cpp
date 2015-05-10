@@ -10,11 +10,20 @@
 
 GadgetMap GadgetSystem::m_gadgetTypes;
 
-Gadget* GadgetSystem::CreateInstance(std::string const& s) {
+Gadget* GadgetSystem::CreateInstance(std::string const& s, ActorHandle i_actorHandle ) {
     GadgetMap::iterator it = GadgetSystem::m_gadgetTypes.find(s);
     if(it == GadgetSystem::m_gadgetTypes.end())
         return 0;
     Gadget* gadget = it->second();
-    gadget->Init();
+    gadget->Init( i_actorHandle );
+    return gadget;
+}
+
+Gadget* GadgetSystem::CreateInstanceWithDNA(std::string const& s, ActorHandle i_actorHandle, LuaScript& i_script) {
+    GadgetMap::iterator it = GadgetSystem::m_gadgetTypes.find(s);
+    if(it == GadgetSystem::m_gadgetTypes.end())
+        return 0;
+    Gadget* gadget = it->second();
+    gadget->DNADataInit( i_actorHandle, i_script );
     return gadget;
 }

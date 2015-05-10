@@ -10,14 +10,18 @@
 #include "SDL2_Image/SDL_Image.h"
 #include <stdio.h>
 #include "Systems/ActorSystem.h"
+#include "Systems/CollisionSystem.h"
 #include "main.h"
 #include <iostream>
 #include "DEFINES.H"
 #include "Gadgets/CollisionGadget.h"
+#include "ext/RotMat.h"
+#include "ext/Vector2d.h"
 
 int main( int argc, char* args[] )
 {
     g_lastFrame = 0;
+    g_lastFPSUpdate = 0;
     SDL_Init( SDL_INIT_VIDEO );
     SDL_CreateWindowAndRenderer( SCREEN_WIDTH, SCREEN_HEIGHT, 0, &g_gameWindow, &g_gameRenderer );
     if( !g_gameWindow )
@@ -32,23 +36,25 @@ int main( int argc, char* args[] )
     SDL_RenderClear( g_gameRenderer );
     
     Actor* a = ActorSystem::CreateActor( "Background" );
-    a->SetPos( Vector2d( 960, 240 ) );
-    
-    
-    g_player = new Player( ActorSystem::CreateActor( "Avatar" ) );
-    g_player->GetActor()->SetPos( Vector2d( 250, 428 ) );
+    a->SetPos( Vector2d( 960, 0 ) );
     
     // create some temporary actors for spatial reference
     Actor* b = ActorSystem::CreateActor( "Tree" );
-    b->SetPos( Vector2d( 100, 332 ) );
+    b->SetPos( Vector2d( 400, 0 ) );
     Actor* c = ActorSystem::CreateActor( "Tree" );
-    c->SetPos( Vector2d( 300, 332 ) );
+    c->SetPos( Vector2d( 500, 0 ) );
     Actor* d = ActorSystem::CreateActor( "Tree" );
-    d->SetPos( Vector2d( 400, 332 ) );
+    d->SetPos( Vector2d( 600, 0 ) );
     Actor* e = ActorSystem::CreateActor( "Tree" );
-    e->SetPos( Vector2d( 500, 332 ) );
+    e->SetPos( Vector2d( 700, 0 ) );
     
-    g_camera = new Camera( g_player->GetActor() );
+    g_player = new Player( ActorSystem::CreateActor( "Avatar" ) );
+    g_player->GetActor()->SetPos( Vector2d( 250, 0 ) );
+    
+    Actor* f = ActorSystem::CreateActor( "Crate" );
+    f->SetPos( Vector2d( 100, 0 ) );
+    
+    g_camera = new Camera( g_player->GetActor(), RotMat( Vector2d( -1, 0 ), Vector2d( 0, -1 ) ) );
     
     loop();
     return 0;
@@ -64,12 +70,21 @@ void loop()
         float dt = (float) delta / 1000.0f;
         
 #ifdef DEBUG
-        float frameRate = 1000.0f / (float ) delta;
-        //std::cout << "FPS: " << frameRate << std::endl;
+        if ( pTime - g_lastFPSUpdate > 250.0f )
+        {
+            g_lastFPSUpdate = pTime;
+            float frameRate = 1000.0f / (float ) delta;
+            //std::cout << "FPS: " << frameRate << std::endl;
+        }
 #endif // DEBUG
         processInput();
         
         g_player->Update( dt );
+        for (std::map<ActorHandle,Actor*>::iterator it=ActorSystem::m_actors.begin(); it!=ActorSystem::m_actors.end(); ++it)
+            it->second->Update( dt );
+        
+        
+        CollisionSystem::Update( dt );
         g_camera->Update( dt );
         
         render( dt );

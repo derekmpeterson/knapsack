@@ -14,8 +14,12 @@
 #include <string>
 #include <map>
 #include "../Gadgets/Gadget.h"
+#include "../ext/LuaScript.h"
+#include "../Actor.h"
+#include "ActorSystem.h"
 
 typedef std::map<std::string, Gadget*(*)()> GadgetMap;
+typedef int ActorHandle;
 
 template<typename T> Gadget* createT() { return new T; }
 
@@ -23,7 +27,21 @@ class GadgetSystem
 {
 public:
     static GadgetMap m_gadgetTypes;
-    static Gadget* CreateInstance(std::string const& s);
+    static Gadget* CreateInstance(std::string const& s, ActorHandle i_actorHandle );
+    static Gadget* CreateInstanceWithDNA(std::string const& s, ActorHandle i_actorHandle, LuaScript& i_script);
+    
+    template<typename GadgetType>
+    static GadgetType* GetGadget( ActorHandle i_actorHandle )
+    {
+        Actor* pActor = ActorSystem::GetActor( i_actorHandle );
+        for (std::vector<Gadget*>::iterator it = pActor->m_gadgets.begin() ; it != pActor->m_gadgets.end(); ++it)
+        {
+            Gadget* pGadget = *it;
+            if ( typeid( *pGadget ) == typeid( GadgetType ) )
+                return (GadgetType*) pGadget;
+        }
+        return NULL;
+    }
 };
 
 template<typename T>

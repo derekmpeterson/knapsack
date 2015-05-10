@@ -13,16 +13,15 @@ void Player::Update( float dt)
     int x = 0;
     int y = 0;
     if ( m_upPressed )
-        y -= 1;
-    if ( m_downPressed )
         y += 1;
+    if ( m_downPressed )
+        y -= 1;
     if ( m_leftPressed )
-        x -= 1;
-    if ( m_rightPressed )
         x += 1;
+    if ( m_rightPressed )
+        x -= 1;
     
     Vector2d accel = Vector2d( x, y );
     accel *= m_actor->GetSpeed();
     m_actor->SetAcceleration( accel );
-    m_actor->Update( dt );
 }

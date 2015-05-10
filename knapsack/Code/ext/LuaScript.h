@@ -8,6 +8,8 @@
 #ifndef __knapsack__LuaScript__
 #define __knapsack__LuaScript__
 
+//#define DEBUG_LUASCRIPT
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -62,7 +64,9 @@ public:
                 }
                 
                 if(lua_isnil(L, -1)) {
+#ifdef DEBUG_LUASCRIPT
                     printError(variableName, var + " is not defined");
+#endif
                     return false;
                 } else {
                     var = "";
@@ -78,7 +82,9 @@ public:
             lua_getfield(L, -1, var.c_str());
         }
         if(lua_isnil(L, -1)) {
+#ifdef DEBUG_LUASCRIPT
             printError(variableName, var + " is not defined");
+#endif
             return false;
         }
         

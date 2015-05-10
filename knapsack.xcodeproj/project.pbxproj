@@ -21,6 +21,9 @@
 		65B0252A1AFE55B400CC3722 /* LuaScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025261AFE55B400CC3722 /* LuaScript.cpp */; };
 		65B0252B1AFE55B400CC3722 /* Vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025281AFE55B400CC3722 /* Vector2d.cpp */; };
 		65B025351AFE64B600CC3722 /* GadgetSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025331AFE64B600CC3722 /* GadgetSystem.cpp */; };
+		65B025381AFEAE5800CC3722 /* AABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025361AFEAE5800CC3722 /* AABB.cpp */; };
+		65B0253B1AFEFF3E00CC3722 /* CollisionSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025391AFEFF3E00CC3722 /* CollisionSystem.cpp */; };
+		65B0253E1AFFBB6300CC3722 /* RotMat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B0253C1AFFBB6300CC3722 /* RotMat.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,6 +68,12 @@
 		65B025311AFE55D100CC3722 /* ActorSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActorSystem.h; path = Code/Systems/ActorSystem.h; sourceTree = "<group>"; };
 		65B025331AFE64B600CC3722 /* GadgetSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GadgetSystem.cpp; path = Code/Systems/GadgetSystem.cpp; sourceTree = "<group>"; };
 		65B025341AFE64B600CC3722 /* GadgetSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GadgetSystem.h; path = Code/Systems/GadgetSystem.h; sourceTree = "<group>"; };
+		65B025361AFEAE5800CC3722 /* AABB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AABB.cpp; path = Code/ext/AABB.cpp; sourceTree = "<group>"; };
+		65B025371AFEAE5800CC3722 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AABB.h; path = Code/ext/AABB.h; sourceTree = "<group>"; };
+		65B025391AFEFF3E00CC3722 /* CollisionSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollisionSystem.cpp; path = Code/Systems/CollisionSystem.cpp; sourceTree = "<group>"; };
+		65B0253A1AFEFF3E00CC3722 /* CollisionSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionSystem.h; path = Code/Systems/CollisionSystem.h; sourceTree = "<group>"; };
+		65B0253C1AFFBB6300CC3722 /* RotMat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RotMat.cpp; path = Code/ext/RotMat.cpp; sourceTree = "<group>"; };
+		65B0253D1AFFBB6300CC3722 /* RotMat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RotMat.h; path = Code/ext/RotMat.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +149,10 @@
 				65B025271AFE55B400CC3722 /* LuaScript.h */,
 				65B025281AFE55B400CC3722 /* Vector2d.cpp */,
 				65B025291AFE55B400CC3722 /* Vector2d.h */,
+				65B025361AFEAE5800CC3722 /* AABB.cpp */,
+				65B025371AFEAE5800CC3722 /* AABB.h */,
+				65B0253C1AFFBB6300CC3722 /* RotMat.cpp */,
+				65B0253D1AFFBB6300CC3722 /* RotMat.h */,
 			);
 			name = ext;
 			sourceTree = "<group>";
@@ -151,6 +164,8 @@
 				65B025311AFE55D100CC3722 /* ActorSystem.h */,
 				65B025331AFE64B600CC3722 /* GadgetSystem.cpp */,
 				65B025341AFE64B600CC3722 /* GadgetSystem.h */,
+				65B025391AFEFF3E00CC3722 /* CollisionSystem.cpp */,
+				65B0253A1AFEFF3E00CC3722 /* CollisionSystem.h */,
 			);
 			name = Systems;
 			sourceTree = "<group>";
@@ -217,8 +232,11 @@
 				65B025041AFC448100CC3722 /* main.cpp in Sources */,
 				65B025191AFDAAA300CC3722 /* CollisionGadget.cpp in Sources */,
 				65B025031AFC448100CC3722 /* Actor.cpp in Sources */,
+				65B0253E1AFFBB6300CC3722 /* RotMat.cpp in Sources */,
 				65B025121AFD9DB400CC3722 /* Camera.cpp in Sources */,
 				65B0252B1AFE55B400CC3722 /* Vector2d.cpp in Sources */,
+				65B025381AFEAE5800CC3722 /* AABB.cpp in Sources */,
+				65B0253B1AFEFF3E00CC3722 /* CollisionSystem.cpp in Sources */,
 				65B025071AFC4F1D00CC3722 /* Player.cpp in Sources */,
 				65B0252A1AFE55B400CC3722 /* LuaScript.cpp in Sources */,
 			);

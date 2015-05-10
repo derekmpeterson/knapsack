@@ -12,20 +12,26 @@
 #include <stdio.h>
 #include "Actor.h"
 #include "ext/Vector2d.h"
+#include "ext/RotMat.h"
+#include "ext/AABB.h"
 
 class Camera
 {
 private:
     Vector2d m_centerPoint;
+    RotMat m_orient;
     Actor* m_focusActor;
 public:
-    Camera( Actor* i_focusActor ){ m_focusActor = i_focusActor; };
+    Camera( Actor* i_focusActor, RotMat i_orient );
     ~Camera();
     
     void Update( float dt );
 
     Vector2d GetCenterPoint() { return m_centerPoint; };
-    Vector2d ToCameraCoords( Vector2d i_pos );
+    Vector2d VectorToCameraSpace( Vector2d i_pos );
+    AABB AABBToCameraSpace( AABB i_extents );
+    
+    RotMat GetOrient() { return m_orient; };
 };
 
 #endif /* defined(__knapsack__Camera__) */

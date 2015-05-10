@@ -1,5 +1,6 @@
 DNA =
 {
+    Name = "Background",
     ImagePath = "Terrain/bg.png",
     Gadgets =
     {

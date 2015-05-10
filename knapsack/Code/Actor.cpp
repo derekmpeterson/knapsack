@@ -16,8 +16,9 @@ extern SDL_Renderer* g_gameRenderer;
 extern ActorSystem* g_actorSystem;
 extern Camera* g_camera;
 
-Actor::Actor( std::string i_imageName ) : m_speed( 200 )
+Actor::Actor( std::string i_name, std::string i_imageName ) : m_speed( 200 )
 {
+    m_name = i_name;
     i_imageName = "Content/" + i_imageName;
     m_texture = IMG_LoadTexture( g_gameRenderer, i_imageName.c_str() );
     SDL_SetTextureBlendMode( m_texture, SDL_BLENDMODE_BLEND );
@@ -46,9 +47,9 @@ void Actor::Draw()
         SDL_QueryTexture( pTexture, NULL, NULL, &pWidth, &pHeight );
         
         Vector2d pActorPos = this->GetPos();
-        Vector2d pLocalPos = g_camera->ToCameraCoords( pActorPos );
+        Vector2d pLocalPos = g_camera->VectorToCameraSpace( pActorPos );
         pLocalPos.SetX( pLocalPos.GetX() - ( 0.5f * pWidth ) );
-        pLocalPos.SetY( pLocalPos.GetY() - ( 0.5f * pHeight ) );
+        pLocalPos.SetY( pLocalPos.GetY() - ( pHeight ) );
         SDL_Rect Rect = { (int) pLocalPos.GetX(), (int) pLocalPos.GetY(), pWidth, pHeight };
         SDL_RenderCopy( g_gameRenderer, pTexture, NULL, &Rect );
     }
@@ -63,8 +64,15 @@ void Actor::Draw()
 
 void Actor::AttachGadget( std::string i_gadgetType )
 {
-    Gadget* gadget = GadgetSystem::CreateInstance( i_gadgetType );
+    Gadget* gadget = GadgetSystem::CreateInstance( i_gadgetType, m_actorHandle );
     ASSERTS( gadget, "Attempting to attach invalid gadget type '"+i_gadgetType+"'" );
     gadget->m_actorHandle = m_actorHandle;
+    m_gadgets.push_back( gadget );
+}
+
+void Actor::AttachGadgetWithDNA( std::string i_gadgetType, LuaScript& i_script )
+{
+    Gadget* gadget = GadgetSystem::CreateInstanceWithDNA( i_gadgetType, m_actorHandle, i_script );
+    ASSERTS( gadget, "Attempting to attach invalid gadget type '"+i_gadgetType+"'" );
     m_gadgets.push_back( gadget );
 }

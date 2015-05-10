@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <string>
+#include "../ext/LuaScript.h"
 
 typedef int ActorHandle;
 
@@ -23,7 +24,8 @@ public:
     
     Gadget();
     
-    virtual void Init();
+    virtual void Init( ActorHandle i_actorHandle );
+    virtual void DNADataInit( ActorHandle i_actorHandle, LuaScript& i_script );
     virtual void Update( float dt );
     virtual void Draw();
 };

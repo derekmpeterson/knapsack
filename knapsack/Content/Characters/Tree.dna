@@ -1,11 +1,13 @@
 DNA =
 {
+    Name = "Tree",
     ImagePath = "Characters/Tree/Tree.png",
     Gadgets =
     {
         Collision =
         {
-            Extents = { -32, 0, 32, 32},
-        },
+            Extents = { -15, 0, 15, 96 },
+            Juggernaut = true,
+        }
     },
 }

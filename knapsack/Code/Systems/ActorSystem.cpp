@@ -9,6 +9,7 @@
 #include "ActorSystem.h"
 #include <random>
 #include "../ext/LuaScript.h"
+#include "DEFINES.h"
 
 std::map<ActorHandle,Actor*> ActorSystem::m_actors;
 
@@ -19,9 +20,10 @@ Actor* ActorSystem::CreateActor( std::string i_name )
         newHandle = rand() % 1000000000;
     
     LuaScript script( "Content/Characters/"+i_name+".dna" );
+    std::string name = script.get<std::string>("DNA.Name");
     std::string imagePath = script.get<std::string>("DNA.ImagePath");
     
-    Actor* newActor = new Actor( imagePath );
+    Actor* newActor = new Actor( name, imagePath );
     newActor->m_actorHandle = newHandle;
     
     
@@ -32,7 +34,7 @@ Actor* ActorSystem::CreateActor( std::string i_name )
         keys = script.getTableKeys("DNA.Gadgets");
         for(std::vector<std::string>::iterator it = keys.begin(); it != keys.end(); it++) {
             std::string gadgetName = *it;
-            newActor->AttachGadget( gadgetName );
+            newActor->AttachGadgetWithDNA( gadgetName, script );
         }
     }
     
@@ -48,5 +50,9 @@ void ActorSystem::DeleteActor( ActorHandle i_actorHandle )
 
 Actor* ActorSystem::GetActor( ActorHandle i_actorHandle )
 {
-    return ActorSystem::m_actors.at( i_actorHandle );
+    ASSERTS( ActorSystem::m_actors.find( i_actorHandle ) != ActorSystem::m_actors.end(), "Trying to get invalid ActorHandle" );
+    if ( ActorSystem::m_actors.find( i_actorHandle ) != ActorSystem::m_actors.end() )
+        return ActorSystem::m_actors.at( i_actorHandle );
+    else
+        return NULL;
 }
