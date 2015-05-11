@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6561EF641B0107F800B29B87 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6561EF631B0107F800B29B87 /* SDL2_ttf.framework */; };
+		6561EF681B01082400B29B87 /* DebugText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6561EF661B01082400B29B87 /* DebugText.cpp */; };
+		6561EF6A1B0113D200B29B87 /* Box2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6561EF691B0113D200B29B87 /* Box2D.framework */; };
 		65B024F11AFAE4F400CC3722 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B024F01AFAE4F400CC3722 /* SDL2.framework */; };
 		65B024F41AFC398B00CC3722 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B024F31AFC398B00CC3722 /* SDL2_image.framework */; };
 		65B024F61AFC3C7A00CC3722 /* Content in CopyFiles */ = {isa = PBXBuildFile; fileRef = 65B024F51AFC3C7100CC3722 /* Content */; };
@@ -24,6 +27,7 @@
 		65B025381AFEAE5800CC3722 /* AABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025361AFEAE5800CC3722 /* AABB.cpp */; };
 		65B0253B1AFEFF3E00CC3722 /* CollisionSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B025391AFEFF3E00CC3722 /* CollisionSystem.cpp */; };
 		65B0253E1AFFBB6300CC3722 /* RotMat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B0253C1AFFBB6300CC3722 /* RotMat.cpp */; };
+		65B0BE1B1B003FA300E4C197 /* GravityGadget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65B0BE191B003FA300E4C197 /* GravityGadget.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +44,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6561EF631B0107F800B29B87 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		6561EF661B01082400B29B87 /* DebugText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DebugText.cpp; path = Code/Debug/DebugText.cpp; sourceTree = "<group>"; };
+		6561EF671B01082400B29B87 /* DebugText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugText.h; path = Code/Debug/DebugText.h; sourceTree = "<group>"; };
+		6561EF691B0113D200B29B87 /* Box2D.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box2D.framework; path = ../../../../Library/Frameworks/Box2D.framework; sourceTree = "<group>"; };
 		65B024E61AFAE4AD00CC3722 /* knapsack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = knapsack; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B024F01AFAE4F400CC3722 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		65B024F31AFC398B00CC3722 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -74,6 +82,8 @@
 		65B0253A1AFEFF3E00CC3722 /* CollisionSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollisionSystem.h; path = Code/Systems/CollisionSystem.h; sourceTree = "<group>"; };
 		65B0253C1AFFBB6300CC3722 /* RotMat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RotMat.cpp; path = Code/ext/RotMat.cpp; sourceTree = "<group>"; };
 		65B0253D1AFFBB6300CC3722 /* RotMat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RotMat.h; path = Code/ext/RotMat.h; sourceTree = "<group>"; };
+		65B0BE191B003FA300E4C197 /* GravityGadget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GravityGadget.cpp; path = Code/Gadgets/GravityGadget.cpp; sourceTree = "<group>"; };
+		65B0BE1A1B003FA300E4C197 /* GravityGadget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GravityGadget.h; path = Code/Gadgets/GravityGadget.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6561EF6A1B0113D200B29B87 /* Box2D.framework in Frameworks */,
+				6561EF641B0107F800B29B87 /* SDL2_ttf.framework in Frameworks */,
 				65B025211AFE54E000CC3722 /* Lua.framework in Frameworks */,
 				65B024F41AFC398B00CC3722 /* SDL2_image.framework in Frameworks */,
 				65B024F11AFAE4F400CC3722 /* SDL2.framework in Frameworks */,
@@ -90,9 +102,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6561EF651B01080300B29B87 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				6561EF661B01082400B29B87 /* DebugText.cpp */,
+				6561EF671B01082400B29B87 /* DebugText.h */,
+			);
+			name = Debug;
+			sourceTree = "<group>";
+		};
 		65B024DD1AFAE4AD00CC3722 = {
 			isa = PBXGroup;
 			children = (
+				6561EF691B0113D200B29B87 /* Box2D.framework */,
+				6561EF631B0107F800B29B87 /* SDL2_ttf.framework */,
 				65B025201AFE54E000CC3722 /* Lua.framework */,
 				65B0250E1AFD921D00CC3722 /* Vector2d.cpp */,
 				65B0250C1AFD921400CC3722 /* ActorSystem.cpp */,
@@ -115,6 +138,7 @@
 		65B024E81AFAE4AD00CC3722 /* knapsack */ = {
 			isa = PBXGroup;
 			children = (
+				6561EF651B01080300B29B87 /* Debug */,
 				65B025251AFE55A400CC3722 /* ext */,
 				65B024FE1AFC448100CC3722 /* Actor.cpp */,
 				65B024FF1AFC448100CC3722 /* Actor.h */,
@@ -138,6 +162,8 @@
 				65B025151AFDA9E800CC3722 /* Gadget.h */,
 				65B025171AFDAAA300CC3722 /* CollisionGadget.cpp */,
 				65B025181AFDAAA300CC3722 /* CollisionGadget.h */,
+				65B0BE191B003FA300E4C197 /* GravityGadget.cpp */,
+				65B0BE1A1B003FA300E4C197 /* GravityGadget.h */,
 			);
 			name = Gadgets;
 			sourceTree = "<group>";
@@ -228,10 +254,12 @@
 			files = (
 				65B0250D1AFD921400CC3722 /* ActorSystem.cpp in Sources */,
 				65B025161AFDA9E800CC3722 /* Gadget.cpp in Sources */,
+				65B0BE1B1B003FA300E4C197 /* GravityGadget.cpp in Sources */,
 				65B025351AFE64B600CC3722 /* GadgetSystem.cpp in Sources */,
 				65B025041AFC448100CC3722 /* main.cpp in Sources */,
 				65B025191AFDAAA300CC3722 /* CollisionGadget.cpp in Sources */,
 				65B025031AFC448100CC3722 /* Actor.cpp in Sources */,
+				6561EF681B01082400B29B87 /* DebugText.cpp in Sources */,
 				65B0253E1AFFBB6300CC3722 /* RotMat.cpp in Sources */,
 				65B025121AFD9DB400CC3722 /* Camera.cpp in Sources */,
 				65B0252B1AFE55B400CC3722 /* Vector2d.cpp in Sources */,
@@ -363,6 +391,7 @@
 				65B024EF1AFAE4AD00CC3722 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

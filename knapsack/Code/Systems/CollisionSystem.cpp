@@ -54,7 +54,7 @@ void CollisionSystem::Update( float dt )
                             Vector2d proposedResolution;
                             if ( pWorldExtents.Intersects( pOtherWorldExtents, proposedResolution ) )
                             {
-                                std::cout << pActor->GetName() << " -> " << pOtherActor->GetName() << " Intersect!" << std::endl;
+                                //std::cout << pActor->GetName() << " -> " << pOtherActor->GetName() << " Intersect!" << std::endl;
                                 pCG->m_intersecting = true;
                                 if ( !pCG->m_juggernaut && pOtherCG->m_juggernaut )
                                 {
@@ -66,8 +66,6 @@ void CollisionSystem::Update( float dt )
                                 }
                                 
                             }
-                            else
-                                std::cout << pActor->GetName() << " -> " << pOtherActor->GetName() << " Safe!" << std::endl;
                         }
                     }
                 }

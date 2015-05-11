@@ -27,11 +27,13 @@ private:
     Vector2d m_acceleration;
     float m_speed;
     SDL_Texture* m_texture;
+    int m_textureWidth;
+    int m_textureHeight;
     std::string m_name;
     
 public:
-    Actor( std::string i_name, std::string i_imageName );
-    ~Actor() {};
+    Actor( ActorHandle i_actorHandle, std::string i_name, std::string i_imageName );
+    ~Actor();
     
     ActorHandle m_actorHandle;
     std::vector<Gadget*> m_gadgets;

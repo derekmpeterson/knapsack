@@ -26,6 +26,7 @@ public:
     ~LuaScript();
     void printError(const std::string& variableName, const std::string& reason);
     std::vector<int> getIntVector(const std::string& name);
+    std::vector<float> getFloatVector(const std::string& name);
     std::vector<std::string> getTableKeys(const std::string& name);
     
     inline void clean() {

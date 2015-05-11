@@ -23,8 +23,7 @@ Actor* ActorSystem::CreateActor( std::string i_name )
     std::string name = script.get<std::string>("DNA.Name");
     std::string imagePath = script.get<std::string>("DNA.ImagePath");
     
-    Actor* newActor = new Actor( name, imagePath );
-    newActor->m_actorHandle = newHandle;
+    Actor* newActor = new Actor( newHandle, name, imagePath );
     
     
     std::vector<std::string> keys = script.getTableKeys("DNA");

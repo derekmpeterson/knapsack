@@ -16,12 +16,18 @@ extern SDL_Renderer* g_gameRenderer;
 extern ActorSystem* g_actorSystem;
 extern Camera* g_camera;
 
-Actor::Actor( std::string i_name, std::string i_imageName ) : m_speed( 200 )
+Actor::Actor( ActorHandle i_actorHandle, std::string i_name, std::string i_imageName ) : m_actorHandle( i_actorHandle ), m_speed( 2 )
 {
     m_name = i_name;
     i_imageName = "Content/" + i_imageName;
     m_texture = IMG_LoadTexture( g_gameRenderer, i_imageName.c_str() );
-    SDL_SetTextureBlendMode( m_texture, SDL_BLENDMODE_BLEND );
+    SDL_QueryTexture( m_texture, NULL, NULL, &m_textureWidth, &m_textureHeight );
+}
+
+Actor::~Actor()
+{
+    SDL_DestroyTexture( m_texture );
+    m_texture = NULL;
 }
 
 void Actor::Update( float dt )
@@ -37,21 +43,16 @@ void Actor::Update( float dt )
 
 void Actor::Draw()
 {
-    SDL_Texture* pTexture = this->GetTexture();
-    SDL_SetTextureBlendMode( pTexture, SDL_BLENDMODE_BLEND );
+    SDL_SetTextureBlendMode( m_texture, SDL_BLENDMODE_BLEND );
     
-    if( pTexture )
+    if( m_texture )
     {
-        int pWidth = 0;
-        int pHeight = 0;
-        SDL_QueryTexture( pTexture, NULL, NULL, &pWidth, &pHeight );
-        
         Vector2d pActorPos = this->GetPos();
         Vector2d pLocalPos = g_camera->VectorToCameraSpace( pActorPos );
-        pLocalPos.SetX( pLocalPos.GetX() - ( 0.5f * pWidth ) );
-        pLocalPos.SetY( pLocalPos.GetY() - ( pHeight ) );
-        SDL_Rect Rect = { (int) pLocalPos.GetX(), (int) pLocalPos.GetY(), pWidth, pHeight };
-        SDL_RenderCopy( g_gameRenderer, pTexture, NULL, &Rect );
+        pLocalPos.SetX( pLocalPos.GetX() - ( 0.5f * m_textureWidth ) );
+        pLocalPos.SetY( pLocalPos.GetY() - ( m_textureHeight ) );
+        SDL_Rect Rect = { (int) std::floor( pLocalPos.GetX() ), (int) std::floor( pLocalPos.GetY() ), m_textureWidth, m_textureHeight };
+        SDL_RenderCopy( g_gameRenderer, m_texture, NULL, &Rect );
     }
     
     for (std::vector<Gadget*>::iterator it = m_gadgets.begin() ; it != m_gadgets.end(); ++it)

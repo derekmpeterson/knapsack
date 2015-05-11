@@ -41,6 +41,21 @@ std::vector<int> LuaScript::getIntVector(const std::string& name) {
     return v;
 }
 
+std::vector<float> LuaScript::getFloatVector(const std::string& name) {
+    std::vector<float> v;
+    lua_gettostack(name.c_str());
+    if(lua_isnil(L, -1)) { // array is not found
+        return std::vector<float>();
+    }
+    lua_pushnil(L);
+    while(lua_next(L, -2)) {
+        v.push_back((float)lua_tonumber(L, -1));
+        lua_pop(L, 1);
+    }
+    clean();
+    return v;
+}
+
 std::vector<std::string> LuaScript::getTableKeys(const std::string& name) {
     std::string globalTable = name.substr( 0, name.find( "." ) );
     std::string tableName = name.substr( name.find(".")+1 );

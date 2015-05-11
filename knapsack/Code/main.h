@@ -30,8 +30,4 @@ Camera* g_camera;
 
 unsigned int g_lastFrame;
 
-#ifdef DEBUG
-unsigned int g_lastFPSUpdate;
-#endif
-
 #endif

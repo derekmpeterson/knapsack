@@ -8,6 +8,7 @@
 
 #include "SDL2/SDL.h"
 #include "SDL2_Image/SDL_Image.h"
+#include "SDL2_ttf/SDL_ttf.h"
 #include <stdio.h>
 #include "Systems/ActorSystem.h"
 #include "Systems/CollisionSystem.h"
@@ -17,47 +18,54 @@
 #include "Gadgets/CollisionGadget.h"
 #include "ext/RotMat.h"
 #include "ext/Vector2d.h"
+#ifdef DEBUG
+#include "Debug/DebugText.h"
+#endif
 
 int main( int argc, char* args[] )
 {
     g_lastFrame = 0;
-#ifdef DEBUG
-    g_lastFPSUpdate = 0;
-#endif
+    
     SDL_Init( SDL_INIT_VIDEO );
-    SDL_CreateWindowAndRenderer( SCREEN_WIDTH, SCREEN_HEIGHT, 0, &g_gameWindow, &g_gameRenderer );
+    //SDL_CreateWindowAndRenderer( SCREEN_WIDTH, SCREEN_HEIGHT, 0, &g_gameWindow, &g_gameRenderer );
+    g_gameWindow = SDL_CreateWindow("knapsack", -SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0 );
+    g_gameRenderer = SDL_CreateRenderer( g_gameWindow, 0, SDL_RENDERER_PRESENTVSYNC );
     if( !g_gameWindow )
     {
         printf( "Could not create window: %s\n", SDL_GetError() );
         return 1;
     }
-    SDL_SetWindowPosition( g_gameWindow, -SCREEN_WIDTH, 0 );
     g_gameSurface = SDL_GetWindowSurface( g_gameWindow );
     
     SDL_SetRenderDrawColor( g_gameRenderer, 0, 0, 0, 255 );
     SDL_RenderClear( g_gameRenderer );
     
+    if(TTF_Init()==-1) {
+        printf("TTF_Init: %s\n", TTF_GetError());
+        exit(2);
+    }
+    
     Actor* a = ActorSystem::CreateActor( "Background" );
-    a->SetPos( Vector2d( 960, 0 ) );
+    a->SetPos( Vector2d( 9.6, 0 ) );
     
     // create some temporary actors for spatial reference
     Actor* b = ActorSystem::CreateActor( "Avatar" );
-    b->SetPos( Vector2d( 400, 0 ) );
+    b->SetPos( Vector2d( 4, 0 ) );
     Actor* c = ActorSystem::CreateActor( "Tree" );
-    c->SetPos( Vector2d( 500, 0 ) );
+    c->SetPos( Vector2d( 5, 0 ) );
     Actor* d = ActorSystem::CreateActor( "Tree" );
-    d->SetPos( Vector2d( 600, 0 ) );
+    d->SetPos( Vector2d( 6, 0 ) );
     Actor* e = ActorSystem::CreateActor( "Tree" );
-    e->SetPos( Vector2d( 700, 0 ) );
+    e->SetPos( Vector2d( 7, 0 ) );
     
     g_player = new Player( ActorSystem::CreateActor( "Avatar" ) );
-    g_player->GetActor()->SetPos( Vector2d( 250, 0 ) );
+    g_player->GetActor()->SetPos( Vector2d( 2.5f, 0 ) );
     
     Actor* f = ActorSystem::CreateActor( "Crate" );
-    f->SetPos( Vector2d( 100, 0 ) );
+    f->SetPos( Vector2d( 1.0f, 0 ) );
     
     g_camera = new Camera( g_player->GetActor(), RotMat( Vector2d( -1, 0 ), Vector2d( 0, -1 ) ) );
-    
+
     loop();
     return 0;
 }
@@ -72,12 +80,15 @@ void loop()
         float dt = (float) delta / 1000.0f;
         
 #ifdef DEBUG
-        if ( pTime - g_lastFPSUpdate > 250.0f )
-        {
-            g_lastFPSUpdate = pTime;
-            float frameRate = 1000.0f / (float ) delta;
-            //std::cout << "FPS: " << frameRate << std::endl;
-        }
+        float frameRate = 1000.0f / (float ) delta;
+        char buf[16];
+        sprintf( buf, "FPS: %0.2f", frameRate );
+        if ( frameRate > 30.0f )
+            DebugText::WriteText( buf, DebugText::COLOR_GREEN );
+        else if ( frameRate > 20.0f )
+            DebugText::WriteText( buf, DebugText::COLOR_YELLOW );
+        else
+            DebugText::WriteText( buf, DebugText::COLOR_RED );
 #endif // DEBUG
         processInput();
         
@@ -100,11 +111,15 @@ void render( float dt )
     
     for (std::map<ActorHandle,Actor*>::iterator it=ActorSystem::m_actors.begin(); it!=ActorSystem::m_actors.end(); ++it)
         it->second->Draw();
+    
+    DebugText::Render();
+    
     SDL_RenderPresent( g_gameRenderer );
 }
 
 void quit()
 {
+    SDL_DestroyRenderer( g_gameRenderer );
     SDL_DestroyWindow( g_gameWindow );
     SDL_Quit();
 }

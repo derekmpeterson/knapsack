@@ -35,7 +35,7 @@ void CollisionGadget::DNADataInit( ActorHandle i_actorHandle, LuaScript& script 
 {
     Init( i_actorHandle );
     
-    std::vector<int> pExtents = script.getIntVector( "DNA.Gadgets.Collision.Extents" );
+    std::vector<float> pExtents = script.getFloatVector( "DNA.Gadgets.Collision.Extents" );
     ASSERTS( pExtents.size() == 4, "Incorrect extents vector" );
     m_extents.SetMinExtents( Vector2d( pExtents[0], pExtents[1] ) );
     m_extents.SetMaxExtents( Vector2d( pExtents[2], pExtents[3] ) );

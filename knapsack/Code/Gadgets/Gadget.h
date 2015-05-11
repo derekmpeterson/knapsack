@@ -18,8 +18,6 @@ typedef int ActorHandle;
 class Gadget
 {
 public:
-    std::string m_gadgetType;
-    
     ActorHandle m_actorHandle;
     
     Gadget();

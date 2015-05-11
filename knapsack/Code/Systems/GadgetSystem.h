@@ -21,7 +21,7 @@
 typedef std::map<std::string, Gadget*(*)()> GadgetMap;
 typedef int ActorHandle;
 
-template<typename T> Gadget* createT() { return new T; }
+template<typename T> Gadget* createT() { return (Gadget*) new T; }
 
 class GadgetSystem
 {

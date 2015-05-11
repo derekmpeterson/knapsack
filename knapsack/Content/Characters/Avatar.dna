@@ -6,7 +6,7 @@ DNA =
     {
         Collision =
         {
-            Extents = { -32, 0, 32, 32 },
+            Extents = { -0.32, 0, 0.32, 0.32 },
         },
     },
 }

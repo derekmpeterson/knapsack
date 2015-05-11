@@ -6,7 +6,7 @@ DNA =
     {
         Collision =
         {
-            Extents = { -8, 0, 8, 96 },
+            Extents = { -0.08, 0, 0.08, 0.96 },
             Juggernaut = true,
         }
     },

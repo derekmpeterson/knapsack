@@ -18,13 +18,14 @@ Camera::Camera( Actor* i_focusActor, RotMat i_orient )
 
 void Camera::Update( float dt )
 {
-    Vector2d pFocusPos = m_focusActor->GetPos();
-    m_centerPoint = pFocusPos;
+    m_centerPoint = m_focusActor->GetPos();
 }
 
 Vector2d Camera::VectorToCameraSpace( Vector2d i_pos )
 {
     i_pos -= m_centerPoint;
+    i_pos = i_pos * 100.0f;
+    
     i_pos = m_orient * i_pos;
     
     i_pos.SetX( i_pos.GetX() + ( 0.5f * SCREEN_WIDTH ) );
@@ -39,8 +40,9 @@ AABB Camera::AABBToCameraSpace( AABB i_extents )
     a = VectorToCameraSpace( a );
     Vector2d b = i_extents.GetMaxExtents();
     b = VectorToCameraSpace( b );
-    
-    
+
+    AABB newExtents = AABB( a, b );
+    newExtents.CorrectValues();
     
     /*Vector2d minExtents = a;
     if ( b.GetX() < a.GetX() )
@@ -53,6 +55,6 @@ AABB Camera::AABBToCameraSpace( AABB i_extents )
     if ( a.GetY() > b.GetY() )
         maxExtents.SetY( a.GetY() );*/
     
-    return AABB( a, b );
+    return newExtents;
 
 }
