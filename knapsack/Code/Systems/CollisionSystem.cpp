@@ -48,7 +48,26 @@ void CollisionSystem::Update( float dt )
                         float otherSafeDistanceSquared = pOtherExtents.SafeDistanceSquared();
                         if ( distanceSquared < safeDistanceSquared || distanceSquared < otherSafeDistanceSquared )
                         {
-                            std::cout << pActor->GetName() << " and " << pOtherActor->GetName() << " colcheck" << std::endl;
+                            //std::cout << pActor->GetName() << " and " << pOtherActor->GetName() << " colcheck" << std::endl;
+                            AABB pWorldExtents = pCG->GetWorldExtents();
+                            AABB pOtherWorldExtents = pOtherCG->GetWorldExtents();
+                            Vector2d proposedResolution;
+                            if ( pWorldExtents.Intersects( pOtherWorldExtents, proposedResolution ) )
+                            {
+                                std::cout << pActor->GetName() << " -> " << pOtherActor->GetName() << " Intersect!" << std::endl;
+                                pCG->m_intersecting = true;
+                                if ( !pCG->m_juggernaut && pOtherCG->m_juggernaut )
+                                {
+                                    pActor->SetPos( pActor->GetPos() + proposedResolution );
+                                }
+                                else if ( !pCG->m_juggernaut && !pOtherCG->m_juggernaut )
+                                {
+                                    pActor->SetPos( pActor->GetPos() + ( proposedResolution * 0.5f ) );
+                                }
+                                
+                            }
+                            else
+                                std::cout << pActor->GetName() << " -> " << pOtherActor->GetName() << " Safe!" << std::endl;
                         }
                     }
                 }

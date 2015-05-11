@@ -9,15 +9,15 @@
 #ifndef knapsack_DEFINES_h
 #define knapsack_DEFINES_h
 
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 670
+
 #define DEBUG 1
-
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-
-#include <iostream>
-
 #ifdef DEBUG
+    #define DEBUG_COLLISON
+
     #include <cassert>
+    #include <iostream>
     #define ASSERTS( condition, message )                                            \
     {                                                                               \
         if(!(condition))                                                            \

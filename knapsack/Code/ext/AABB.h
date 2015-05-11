@@ -36,6 +36,8 @@ public:
     SDL_Rect ToRect();
     
     float SafeDistanceSquared();
+    
+    bool Intersects( AABB i_aabb, Vector2d& o_proposedResolution );
 };
 
 #endif /* defined(__knapsack__AABB__) */

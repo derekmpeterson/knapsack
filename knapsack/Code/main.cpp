@@ -21,7 +21,9 @@
 int main( int argc, char* args[] )
 {
     g_lastFrame = 0;
+#ifdef DEBUG
     g_lastFPSUpdate = 0;
+#endif
     SDL_Init( SDL_INIT_VIDEO );
     SDL_CreateWindowAndRenderer( SCREEN_WIDTH, SCREEN_HEIGHT, 0, &g_gameWindow, &g_gameRenderer );
     if( !g_gameWindow )
@@ -29,7 +31,7 @@ int main( int argc, char* args[] )
         printf( "Could not create window: %s\n", SDL_GetError() );
         return 1;
     }
-    SDL_SetWindowPosition( g_gameWindow, 0, 0 );
+    SDL_SetWindowPosition( g_gameWindow, -SCREEN_WIDTH, 0 );
     g_gameSurface = SDL_GetWindowSurface( g_gameWindow );
     
     SDL_SetRenderDrawColor( g_gameRenderer, 0, 0, 0, 255 );
@@ -39,7 +41,7 @@ int main( int argc, char* args[] )
     a->SetPos( Vector2d( 960, 0 ) );
     
     // create some temporary actors for spatial reference
-    Actor* b = ActorSystem::CreateActor( "Tree" );
+    Actor* b = ActorSystem::CreateActor( "Avatar" );
     b->SetPos( Vector2d( 400, 0 ) );
     Actor* c = ActorSystem::CreateActor( "Tree" );
     c->SetPos( Vector2d( 500, 0 ) );

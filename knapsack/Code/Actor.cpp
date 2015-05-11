@@ -60,6 +60,18 @@ void Actor::Draw()
         if ( pGadget )
             pGadget->Draw();
     }
+    
+#ifdef DEBUG
+    Vector2d localPos = g_camera->VectorToCameraSpace( GetPos() );
+    SDL_Rect r;
+    r.x = localPos.GetX() - 3.0f;
+    r.y = localPos.GetY() - 3.0f;
+    r.w = localPos.GetX() + 3.0f - r.x;
+    r.h = localPos.GetY() + 3.0f - r.y;
+    SDL_SetRenderDrawBlendMode( g_gameRenderer, SDL_BLENDMODE_BLEND );
+    SDL_SetRenderDrawColor( g_gameRenderer, 0, 255, 0, 255 );
+    SDL_RenderFillRect( g_gameRenderer, &r );
+#endif
 }
 
 void Actor::AttachGadget( std::string i_gadgetType )

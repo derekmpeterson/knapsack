@@ -14,6 +14,7 @@
 #include "Gadget.h"
 #include "../Systems/GadgetSystem.h"
 #include "../ext/AABB.h"
+#include "DEFINES.h"
 
 class CollisionGadget : public Gadget
 {
@@ -31,6 +32,9 @@ public:
     AABB GetWorldExtents();
     
     bool m_juggernaut;
+#ifdef DEBUG_COLLISON
+    bool m_intersecting;
+#endif
 };
 
 #endif /* defined(__knapsack__CollisionGadget__) */

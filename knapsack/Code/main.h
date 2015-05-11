@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "Actor.h"
 #include "Camera.h"
+#include "DEFINES.h"
 
 SDL_Window* g_gameWindow;
 SDL_Renderer* g_gameRenderer;

@@ -45,11 +45,14 @@ void CollisionGadget::DNADataInit( ActorHandle i_actorHandle, LuaScript& script 
 
 void CollisionGadget::Update( float dt )
 {
-    
+#ifdef DEBUG_COLLISON
+    m_intersecting = false;
+#endif
 }
 
 void CollisionGadget::Draw()
 {
+#ifdef DEBUG_COLLISON
     AABB pWorldExtents = GetWorldExtents();
     AABB pCameraExtents = g_camera->AABBToCameraSpace( pWorldExtents );
     SDL_Rect r = pCameraExtents.ToRect();
@@ -57,17 +60,13 @@ void CollisionGadget::Draw()
     SDL_SetRenderDrawColor( g_gameRenderer, 255, 0, 0, 255 );
     SDL_RenderDrawRect( g_gameRenderer, &r );
     
-    Actor* pActor = ActorSystem::GetActor( m_actorHandle );
-    if ( pActor )
+    if ( m_intersecting )
     {
-        Vector2d localPos = g_camera->VectorToCameraSpace( pActor->GetPos() );
-        r.x = localPos.GetX() - 3.0f;
-        r.y = localPos.GetY() - 3.0f;
-        r.w = localPos.GetX() + 3.0f - r.x;
-        r.h = localPos.GetY() + 3.0f - r.y;
-        SDL_SetRenderDrawColor( g_gameRenderer, 0, 255, 0, 255 );
+        SDL_SetRenderDrawBlendMode( g_gameRenderer, SDL_BLENDMODE_BLEND );
+        SDL_SetRenderDrawColor( g_gameRenderer, 255, 0, 0, 95 );
         SDL_RenderFillRect( g_gameRenderer, &r );
     }
+#endif
 }
 
 AABB CollisionGadget::GetWorldExtents()
