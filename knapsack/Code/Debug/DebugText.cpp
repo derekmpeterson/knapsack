@@ -47,6 +47,7 @@ void DebugText::Render()
             SDL_Rect renderQuad = { dtd->m_x, dtd->m_y, text_width, text_height };
             SDL_RenderCopy( g_gameRenderer, text, NULL, &renderQuad );
             SDL_DestroyTexture( text );
+            TTF_CloseFont( font );
         }
     }
     m_drawBuffer.clear();

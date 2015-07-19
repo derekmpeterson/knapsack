@@ -13,6 +13,7 @@
 #include "Actor.h"
 #include <map>
 #include <string>
+#include "../ext/Vector2d.h"
 
 typedef int ActorHandle;
 
@@ -20,7 +21,7 @@ class ActorSystem
 {
 public:
     static std::map<ActorHandle,Actor*> m_actors;
-    static Actor* CreateActor( std::string i_name );
+    static Actor* CreateActor( std::string i_name, Vector2d i_pos );
     static void DeleteActor( ActorHandle i_actorHandle );
     
     static Actor* GetActor( ActorHandle i_actorHandle );

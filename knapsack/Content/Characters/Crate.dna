@@ -1,12 +1,12 @@
 DNA =
 {
-    Name = "Background",
-    ImagePath = "Terrain/bg.png",
+    Name = "Crate",
+    ImagePath = "Characters/Crate/Crate.png",
     Gadgets =
     {
         Collision =
         {
-            Extents = { -96, 0, 96, 2.4 },
+            Extents = { -6.4, 0, 6.4, 12.8 },
             Juggernaut = true,
             Friction = 1.0,
         }

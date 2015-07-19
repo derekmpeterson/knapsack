@@ -17,7 +17,7 @@
 #include "DEFINES.H"
 #include "Gadgets/CollisionGadget.h"
 #include "ext/RotMat.h"
-#include "ext/Vector2d.h"
+
 #ifdef DEBUG
 #include "Debug/DebugText.h"
 #endif
@@ -45,26 +45,21 @@ int main( int argc, char* args[] )
         exit(2);
     }
     
-    Actor* a = ActorSystem::CreateActor( "Background" );
-    a->SetPos( Vector2d( 9.6, 0 ) );
+    ActorSystem::CreateActor( "Background", Vector2d( 96.0f, 0.0f ) );
     
     // create some temporary actors for spatial reference
-    Actor* b = ActorSystem::CreateActor( "Avatar" );
-    b->SetPos( Vector2d( 4, 0 ) );
-    Actor* c = ActorSystem::CreateActor( "Tree" );
-    c->SetPos( Vector2d( 5, 0 ) );
-    Actor* d = ActorSystem::CreateActor( "Tree" );
-    d->SetPos( Vector2d( 6, 0 ) );
-    Actor* e = ActorSystem::CreateActor( "Tree" );
-    e->SetPos( Vector2d( 7, 0 ) );
+    //ActorSystem::CreateActor( "Avatar", Vector2d( 40.0f, 0.0f ) );
+    ActorSystem::CreateActor( "Tree", Vector2d( 50.0f, 0.0f ) );
+    ActorSystem::CreateActor( "Tree", Vector2d( 60.0f, 0.0f ) );
+    ActorSystem::CreateActor( "Tree", Vector2d( 70.0f, 0.0f ) );
     
-    g_player = new Player( ActorSystem::CreateActor( "Avatar" ) );
-    g_player->GetActor()->SetPos( Vector2d( 2.5f, 0 ) );
+    g_player = new Player( ActorSystem::CreateActor( "Avatar", Vector2d( 25.0f, 20.0f ) ) );
     
-    Actor* f = ActorSystem::CreateActor( "Crate" );
-    f->SetPos( Vector2d( 1.0f, 0 ) );
+    ActorSystem::CreateActor( "Crate", Vector2d( 10.0f, 0.0f ) );
     
     g_camera = new Camera( g_player->GetActor(), RotMat( Vector2d( -1, 0 ), Vector2d( 0, -1 ) ) );
+    
+    CollisionSystem::Init();
 
     loop();
     return 0;
@@ -140,7 +135,7 @@ void processInput()
                     g_quitTriggered = true;
                     break;
                 case SDLK_w:
-                    g_player->SetUpPressed( true );
+                    g_player->SetJumpPressed( true );
                     break;
                 case SDLK_s:
                     g_player->SetDownPressed( true );
@@ -158,7 +153,7 @@ void processInput()
             switch( g_event.key.keysym.sym )
             {
                 case SDLK_w:
-                    g_player->SetUpPressed( false );
+                    g_player->SetJumpPressed( false );
                     break;
                 case SDLK_s:
                     g_player->SetDownPressed( false );

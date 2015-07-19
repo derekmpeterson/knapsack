@@ -15,6 +15,9 @@
 #include "../Systems/GadgetSystem.h"
 #include "../ext/AABB.h"
 #include "DEFINES.h"
+#include "Box2D/Box2D.h"
+
+typedef int ActorHandle;
 
 class CollisionGadget : public Gadget
 {
@@ -29,12 +32,20 @@ public:
     static GadgetRegister<CollisionGadget> reg;
     
     AABB m_extents;
-    AABB GetWorldExtents();
+    AABB GetWorldExtents( AABB& i_extents );
+    AABB m_groundSensorExtents;
     
     bool m_juggernaut;
 #ifdef DEBUG_COLLISON
     bool m_intersecting;
 #endif
+    bool m_onGround;
+    
+    b2Body* m_b2Body;
+    b2Body* m_groundSensorBody;
+    
+    void GroundSensorBeginContact( b2Contact* contact );
+    void GroundSensorEndContact( b2Contact* contact );
 };
 
 #endif /* defined(__knapsack__CollisionGadget__) */

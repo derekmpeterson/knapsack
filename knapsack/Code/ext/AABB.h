@@ -29,15 +29,12 @@ public:
     
     Vector2d GetMinExtents() { return m_minExtents; };
     Vector2d GetMaxExtents() { return m_maxExtents; };
-    
-    //AABB ToBasis( RotMat i_orient );
     void CorrectValues();
     
     SDL_Rect ToRect();
-    
-    float SafeDistanceSquared();
-    
-    bool Intersects( AABB i_aabb, Vector2d& o_proposedResolution );
+ 
+    Vector2d GetCenter();
+    Vector2d GetHalfLength();
 };
 
 #endif /* defined(__knapsack__AABB__) */

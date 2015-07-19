@@ -7,21 +7,32 @@
 //
 
 #include "Player.h"
+#include "CollisionGadget.h"
 
 void Player::Update( float dt)
 {
-    int x = 0;
-    int y = 0;
-    if ( m_upPressed )
-        y += 1;
-    if ( m_downPressed )
-        y -= 1;
+    Vector2d currentAccel = m_actor->GetAcceleration();
+    float x = currentAccel.GetX();
+    float y = currentAccel.GetY();
+    
+    CollisionGadget* pCollisionGadget = GadgetSystem::GetGadget<CollisionGadget>( m_actor->m_actorHandle );
+    if ( m_jumpPressed && pCollisionGadget && pCollisionGadget->m_onGround )
+    {
+        y += m_actor->GetSpeed() * 2.0f;
+        pCollisionGadget->m_onGround = false;
+    }
+    else
+        y = 0.0f;
     if ( m_leftPressed )
-        x += 1;
+        x += m_actor->GetSpeed() * 0.1f;
+    else if ( !m_rightPressed )
+        x = 0.0f;
     if ( m_rightPressed )
-        x -= 1;
+        x -= m_actor->GetSpeed() * 0.1f;
+    else if ( !m_leftPressed )
+        x = 0.0f;
     
     Vector2d accel = Vector2d( x, y );
-    accel *= m_actor->GetSpeed();
+    accel.ClampX( m_actor->GetSpeed() );
     m_actor->SetAcceleration( accel );
 }

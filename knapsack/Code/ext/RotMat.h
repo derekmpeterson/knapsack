@@ -32,16 +32,17 @@ public:
     {
         //RXX RXY   X     X*RXX + Y*RXY
         //RYX RYY   Y     X*RYX + Y*RYY
-        i_vector.SetX(
+        Vector2d newVector;
+        newVector.SetX(
                       i_vector.GetX() * this->GetXAxis().GetX() +
                       i_vector.GetY() * this->GetXAxis().GetY()
                       );
-        i_vector.SetY(
+        newVector.SetY(
                       i_vector.GetX() * this->GetYAxis().GetX() +
                       i_vector.GetY() * this->GetYAxis().GetY()
                       );
         
-        return i_vector;
+        return newVector;
     }
 };
 

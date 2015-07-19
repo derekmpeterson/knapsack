@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "DebugText::WriteText(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):DebugText.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "CollisionGadget::Draw():CollisionGadget.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ActorSystem::GetActor(int):ActorSystem.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "CollisionGadget::GetWorldExtents():CollisionGadget.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ActorSystem::CreateActor(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, Vector2d):ActorSystem.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "ActorSystem::m_actors">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Actor::Update(float):Actor.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "m_acceleration * dt">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CollisionGadget::DNADataInit(int, LuaScript&amp;):CollisionGadget.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "Actor::AttachGadgetWithDNA(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, LuaScript&amp;):Actor.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ActorSystem::CreateActor(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):ActorSystem.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "(Actor*) 0x103538900">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CollisionSystem::Update(float):CollisionSystem.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "CollisionSystem::m_activeActors">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Actor::Update():Actor.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "Camera::AABBToCameraSpace(AABB):Camera.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "CollisionGadget::Update(float):CollisionGadget.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "pActor-&gt;m_acceleration = Vector2d( 2.0f, 0.0f )">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Camera::VectorToCameraSpace(Vector2d):Camera.cpp">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

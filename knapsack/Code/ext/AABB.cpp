@@ -61,14 +61,14 @@ SDL_Rect AABB::ToRect()
     return r;
 }
 
-float AABB::SafeDistanceSquared()
+/*float AABB::SafeDistanceSquared()
 {
     float minLength = m_minExtents.LengthSquared();
     Vector2d diag = m_maxExtents - m_minExtents;
     return minLength + diag.LengthSquared();
-}
+}*/
 
-bool AABB::Intersects( AABB i_aabb, Vector2d& o_proposedResolution )
+/*bool AABB::Intersects( AABB i_aabb, Vector2d& o_proposedResolution )
 {
     bool xMinIntersect = m_minExtents.GetX() >= i_aabb.GetMinExtents().GetX() &&
                          m_minExtents.GetX() <= i_aabb.GetMaxExtents().GetX();
@@ -233,4 +233,23 @@ bool AABB::Intersects( AABB i_aabb, Vector2d& o_proposedResolution )
     }
     
     return false;
+}*/
+
+Vector2d AABB::GetCenter()
+{
+    float xDiff = std::abs( m_maxExtents.GetX() ) + std::abs( m_minExtents.GetX() );
+    float yDiff = std::abs( m_maxExtents.GetY() ) + std::abs( m_minExtents.GetY() );
+    Vector2d diff = Vector2d( xDiff, yDiff );
+    Vector2d halfDiff = ( diff * 0.5f );
+    Vector2d center = m_maxExtents - halfDiff;
+    return center;
 }
+
+Vector2d AABB::GetHalfLength()
+{
+    float xDiff = std::abs( m_maxExtents.GetX() ) + std::abs( m_minExtents.GetX() );
+    float yDiff = std::abs( m_maxExtents.GetY() ) + std::abs( m_minExtents.GetY() );
+    Vector2d diff = Vector2d( xDiff, yDiff );
+    Vector2d halfDiff = ( diff * 0.5f );
+    return halfDiff;
+};

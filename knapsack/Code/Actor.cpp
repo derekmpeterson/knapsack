@@ -16,13 +16,14 @@ extern SDL_Renderer* g_gameRenderer;
 extern ActorSystem* g_actorSystem;
 extern Camera* g_camera;
 
-Actor::Actor( ActorHandle i_actorHandle, std::string i_name, std::string i_imageName ) : m_actorHandle( i_actorHandle ), m_speed( 2 )
+Actor::Actor( ActorHandle i_actorHandle, std::string i_name, std::string i_imageName, Vector2d i_pos ) : m_actorHandle( i_actorHandle ), m_speed( 40 ), m_pos( i_pos )
 {
     m_name = i_name;
     i_imageName = "Content/" + i_imageName;
     m_texture = IMG_LoadTexture( g_gameRenderer, i_imageName.c_str() );
     SDL_QueryTexture( m_texture, NULL, NULL, &m_textureWidth, &m_textureHeight );
 }
+
 
 Actor::~Actor()
 {
@@ -38,7 +39,7 @@ void Actor::Update( float dt )
         if ( pGadget )
             pGadget->Update( dt );
     }
-    m_pos += m_acceleration * dt;
+    //m_pos += m_acceleration * dt;
 }
 
 void Actor::Draw()
@@ -71,7 +72,7 @@ void Actor::Draw()
     r.h = localPos.GetY() + 3.0f - r.y;
     SDL_SetRenderDrawBlendMode( g_gameRenderer, SDL_BLENDMODE_BLEND );
     SDL_SetRenderDrawColor( g_gameRenderer, 0, 255, 0, 255 );
-    SDL_RenderFillRect( g_gameRenderer, &r );
+    //SDL_RenderFillRect( g_gameRenderer, &r );
 #endif
 }
 

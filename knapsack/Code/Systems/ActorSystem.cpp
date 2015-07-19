@@ -13,7 +13,7 @@
 
 std::map<ActorHandle,Actor*> ActorSystem::m_actors;
 
-Actor* ActorSystem::CreateActor( std::string i_name )
+Actor* ActorSystem::CreateActor( std::string i_name, Vector2d i_pos )
 {
     ActorHandle newHandle = rand() % 1000000000;
     while ( ActorSystem::m_actors.count( newHandle ) != 0 )
@@ -23,8 +23,9 @@ Actor* ActorSystem::CreateActor( std::string i_name )
     std::string name = script.get<std::string>("DNA.Name");
     std::string imagePath = script.get<std::string>("DNA.ImagePath");
     
-    Actor* newActor = new Actor( newHandle, name, imagePath );
+    Actor* newActor = new Actor( newHandle, name, imagePath, i_pos );
     
+    ActorSystem::m_actors.insert( std::make_pair( newHandle, newActor ) );
     
     std::vector<std::string> keys = script.getTableKeys("DNA");
     if ( std::find(keys.begin(), keys.end(), "Gadgets") != keys.end() )
@@ -37,7 +38,6 @@ Actor* ActorSystem::CreateActor( std::string i_name )
         }
     }
     
-    ActorSystem::m_actors.insert( std::make_pair( newHandle, newActor ) );
     return ActorSystem::GetActor( newHandle );
 }
 

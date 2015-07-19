@@ -32,7 +32,7 @@ private:
     std::string m_name;
     
 public:
-    Actor( ActorHandle i_actorHandle, std::string i_name, std::string i_imageName );
+    Actor( ActorHandle i_actorHandle, std::string i_name, std::string i_imageName, Vector2d i_pos );
     ~Actor();
     
     ActorHandle m_actorHandle;

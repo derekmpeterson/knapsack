@@ -14,10 +14,39 @@
 #include "DEFINES.H"
 
 std::vector<ActorHandle> CollisionSystem::m_activeActors;
+Vector2d CollisionSystem::m_gravity;
+b2World CollisionSystem::m_world( Vector2d( 0.0f, 0.0f ) );
 
+float32 CollisionSystem::m_timeStep;
+int32 CollisionSystem::m_velocityIterations;
+int32 CollisionSystem::m_positionIterations;
+float32 CollisionSystem::m_accumulator;
+
+ContactListener CollisionSystem::m_contactListener;
+
+void CollisionSystem::Init()
+{
+    m_timeStep = 1.0f / 60.0f;
+    m_velocityIterations = 6;
+    m_positionIterations = 2;
+    m_accumulator = 0.0f;
+    
+    m_gravity = Vector2d( 0.0f, -200.0f );
+    m_contactListener = ContactListener();
+    m_world.SetAllowSleeping(true);
+    m_world.SetContinuousPhysics(true);
+    m_world.SetContactListener( &m_contactListener );
+    m_world.SetGravity( m_gravity );
+}
 void CollisionSystem::Update( float dt )
 {
-    for(std::vector<ActorHandle>::iterator it = CollisionSystem::m_activeActors.begin(); it != CollisionSystem::m_activeActors.end(); it++)
+    m_accumulator += dt;
+    while ( m_accumulator > m_timeStep )
+    {
+        m_accumulator -= m_timeStep;
+        m_world.Step( m_timeStep, m_velocityIterations, m_positionIterations );
+    }
+    /*for(std::vector<ActorHandle>::iterator it = CollisionSystem::m_activeActors.begin(); it != CollisionSystem::m_activeActors.end(); it++)
     {
         ActorHandle pActorHandle = *it;
         CollisionGadget* pCG = GadgetSystem::GetGadget<CollisionGadget>( pActorHandle );
@@ -71,7 +100,7 @@ void CollisionSystem::Update( float dt )
                 }
             }
         }
-    }
+    }*/
 
 }
 
@@ -83,4 +112,56 @@ void CollisionSystem::Register( ActorHandle i_actorHandle )
 void CollisionSystem::Unregister( ActorHandle i_actorHandle )
 {
     CollisionSystem::m_activeActors.erase(std::remove(CollisionSystem::m_activeActors.begin(), CollisionSystem::m_activeActors.end(), i_actorHandle), CollisionSystem::m_activeActors.end());
+}
+
+void ContactListener::BeginContact( b2Contact* contact )
+{
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+    
+    //make sure only one of the fixtures was a sensor
+    bool sensorA = fixtureA->IsSensor();
+    bool sensorB = fixtureB->IsSensor();
+    if ( ! (sensorA ^ sensorB) )
+        return;
+    
+    CollisionGadget* pCollisionGadget  = NULL;
+    if ( sensorA )
+        pCollisionGadget = (CollisionGadget*) fixtureA->GetUserData();
+    if ( sensorB )
+        pCollisionGadget = (CollisionGadget*) fixtureB->GetUserData();
+    
+    if ( pCollisionGadget )
+    {
+        Actor* pActor = ActorSystem::GetActor( pCollisionGadget->m_actorHandle );
+        std::cout << pActor->GetName() << " sensor contact!" << std::endl;
+        
+        pCollisionGadget->GroundSensorBeginContact( contact );
+    }
+}
+
+void ContactListener::EndContact( b2Contact *contact )
+{
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+    
+    //make sure only one of the fixtures was a sensor
+    bool sensorA = fixtureA->IsSensor();
+    bool sensorB = fixtureB->IsSensor();
+    if ( ! (sensorA ^ sensorB) )
+        return;
+    
+    CollisionGadget* pCollisionGadget  = NULL;
+    if ( sensorA )
+        pCollisionGadget = (CollisionGadget*) fixtureA->GetUserData();
+    if ( sensorB )
+        pCollisionGadget = (CollisionGadget*) fixtureB->GetUserData();
+    
+    if ( pCollisionGadget )
+    {
+        Actor* pActor = ActorSystem::GetActor( pCollisionGadget->m_actorHandle );
+        std::cout << pActor->GetName() << " sensor contact end!" << std::endl;
+        
+        pCollisionGadget->GroundSensorEndContact( contact );
+    }
 }

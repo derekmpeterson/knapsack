@@ -15,13 +15,13 @@
 class Player
 {
 private:
-    bool m_upPressed;
+    bool m_jumpPressed;
     bool m_downPressed;
     bool m_leftPressed;
     bool m_rightPressed;
     Actor* m_actor;
 public:
-    Player( Actor* i_actor ) : m_upPressed( false ), m_downPressed( false ), m_leftPressed( false ), m_rightPressed( false ) {
+    Player( Actor* i_actor ) : m_jumpPressed( false ), m_downPressed( false ), m_leftPressed( false ), m_rightPressed( false ) {
         m_actor = i_actor;
     };
     ~Player() { delete m_actor; };
@@ -30,12 +30,12 @@ public:
     
     void Update( float dt );
     
-    void SetUpPressed( bool i_bool ) { m_upPressed = i_bool; };
+    void SetJumpPressed( bool i_bool ) { m_jumpPressed = i_bool; };
     void SetDownPressed( bool i_bool ) { m_downPressed = i_bool; };
     void SetLeftPressed( bool i_bool ) { m_leftPressed = i_bool; };
     void SetRightPressed( bool i_bool ) { m_rightPressed = i_bool; };
     
-    bool GetUpPressed() { return m_upPressed; };
+    bool GetJumpPressed() { return m_jumpPressed; };
     bool GetDownPressed() { return m_downPressed; };
     bool GetLeftPressed() { return m_leftPressed; };
     bool GetRightPressed() { return m_rightPressed; };

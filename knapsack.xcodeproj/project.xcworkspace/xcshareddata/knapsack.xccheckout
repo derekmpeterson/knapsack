@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>53A37D5F-63AA-4AFE-8B87-C9F8680EAB96</string>
+	<key>IDESourceControlProjectName</key>
+	<string>knapsack</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5587565CC6459CBB0B5999CA48765060123FE593</key>
+		<string>bitbucket.org:derekpeterson/knapsack.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>knapsack.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5587565CC6459CBB0B5999CA48765060123FE593</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:derekpeterson/knapsack.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5587565CC6459CBB0B5999CA48765060123FE593</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5587565CC6459CBB0B5999CA48765060123FE593</string>
+			<key>IDESourceControlWCCName</key>
+			<string>knapsack</string>
+		</dict>
+	</array>
+</dict>
+</plist>

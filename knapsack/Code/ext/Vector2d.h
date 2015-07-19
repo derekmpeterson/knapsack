@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <cmath>
+#include "Box2D/Box2D.h"
 
 class Vector2d
 {
@@ -31,6 +32,35 @@ public:
     float Length() { return sqrt( pow( m_x, 2 ) + pow( m_y, 2 ) ); };
     float LengthSquared() { return ( pow( m_x, 2 ) + pow( m_y, 2 ) ); };
     
+    void Clamp( float i_magnitude )
+    {
+        ClampX( i_magnitude );
+        ClampY( i_magnitude );
+    }
+
+    void ClampX( float i_magnitude )
+    {
+        if ( std::abs( m_x ) > i_magnitude )
+        {
+            if ( m_x > 0.0f )
+                m_x = i_magnitude;
+            else
+                m_x = -i_magnitude;
+        }
+    }
+    
+    void ClampY( float i_magnitude )
+    {
+        if ( std::abs( m_y ) > i_magnitude )
+        {
+            if ( m_y > 0.0f )
+                m_y = i_magnitude;
+            else
+                m_y = -i_magnitude;
+        }
+    }
+
+
     Vector2d& operator+=( const Vector2d& other ) // compound assignment (does not need to be a member,
     {                           // but often is, to modify the private members)
         this->SetX( this->GetX() + other.GetX() );
@@ -38,11 +68,10 @@ public:
         return *this; // return the result by reference
     }
     
-    Vector2d& operator+( const Vector2d& other ) // compound assignment (does not need to be a member,
+    Vector2d operator+( const Vector2d& other ) // compound assignment (does not need to be a member,
     {                           // but often is, to modify the private members)
-        this->SetX( this->GetX() + other.GetX() );
-        this->SetY( this->GetY() + other.GetY() );
-        return *this; // return the result by reference
+        Vector2d newVector( this->GetX() + other.GetX(), this->GetY() + other.GetY() );
+        return newVector; // return the result by reference
     }
     
     Vector2d& operator-=( const Vector2d& other ) // compound assignment (does not need to be a member,
@@ -52,11 +81,10 @@ public:
         return *this; // return the result by reference
     }
     
-    Vector2d& operator-( const Vector2d& other ) // compound assignment (does not need to be a member,
+    Vector2d operator-( const Vector2d& other ) // compound assignment (does not need to be a member,
     {                           // but often is, to modify the private members)
-        this->SetX( this->GetX() - other.GetX() );
-        this->SetY( this->GetY() - other.GetY() );
-        return *this; // return the result by reference
+        Vector2d newVector( this->GetX() - other.GetX(), this->GetY() - other.GetY() );
+        return newVector; // return the result by reference
     }
     
     Vector2d& operator*=( const float scalar )
@@ -73,6 +101,8 @@ public:
         
         return newVector;
     }
+    
+    operator b2Vec2() const { return b2Vec2( m_x, m_y ); }
 };
 
 #endif /* defined(__knapsack__Vector2d__) */

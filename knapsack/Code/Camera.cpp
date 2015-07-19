@@ -24,7 +24,7 @@ void Camera::Update( float dt )
 Vector2d Camera::VectorToCameraSpace( Vector2d i_pos )
 {
     i_pos -= m_centerPoint;
-    i_pos = i_pos * 100.0f;
+    i_pos = i_pos * 10.0f;
     
     i_pos = m_orient * i_pos;
     
@@ -42,7 +42,7 @@ AABB Camera::AABBToCameraSpace( AABB i_extents )
     b = VectorToCameraSpace( b );
 
     AABB newExtents = AABB( a, b );
-    newExtents.CorrectValues();
+    //newExtents.CorrectValues();
     
     /*Vector2d minExtents = a;
     if ( b.GetX() < a.GetX() )
